@@ -1,0 +1,54 @@
+#%RAML 1.0
+title: mini-project-api
+
+types:
+  User: !include resources/dataType.raml
+  ArrayUser: !include resources/arrayDataType.raml
+
+/createUser:
+  post:
+    body:
+      application/json:
+        type: User
+        examples:
+          input: !include examples/UserExampleNoID.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: User added (but not really)
+
+/createUsers:
+  post:
+    body:
+      application/json:
+        type: ArrayUser
+        examples:
+          input: !include examples/UserExamplesNoID.raml
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              message: Users added (but not really)
+
+/getUsers:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: User[]
+            examples:
+              output: !include examples/UserExamples.raml
+/getUser/{username}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: User
+              examples:
+                output: !include examples/UserExample.raml
+              

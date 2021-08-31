@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "username": "jlazim",
+      "fullname": "jabalnur Lazim",
+      "age": "30",
+      "gender": "male",
+      "dateRegistered": "20-08-2012"
+    },
+    {
+      "username": "jlazim",
+      "fullname": "jabalnur Lazim",
+      "age": "30",
+      "gender": "male",
+      "dateRegistered": "20-08-2012"
+    }
+  ],
+  "responseCode": "200"
+}

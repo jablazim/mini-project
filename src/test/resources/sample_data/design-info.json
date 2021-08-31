@@ -1,0 +1,8 @@
+{
+  "sampleData": {
+    "60e1dbc7-235d-4402-b86f-3919c984a405": {
+      "payload": "sample_data/statementresult.dwl",
+      "vars-user": "sample_data/java.dwl"
+    }
+  }
+}

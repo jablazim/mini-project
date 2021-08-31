@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<types:mule xmlns:types="http://www.mulesoft.org/schema/mule/types">
+  <types:catalog>
+    <types:type name="get_users_json" format="json">
+      <types:shape format="weave" example="examples/users-2.json"><![CDATA[%dw 2.0
+
+type get_users_json = {|
+  users: Array<{|    username: String,     fullname: String,     age: String,     gender: String,     dateRegistered: String  |}>, 
+  responseCode: String
+|} {"example": "{\\\"users\\\":[{\\\"username\\\":\\\"jlazim\\\",\\\"fullname\\\":\\\"jabalnur Lazim\\\",\\\"age\\\":\\\"30\\\",\\\"gender\\\":\\\"male\\\",\\\"dateRegistered\\\":\\\"20-08-2012\\\"},{\\\"username\\\":\\\"jlazim\\\",\\\"fullname\\\":\\\"jabalnur Lazim\\\",\\\"age\\\":\\\"30\\\",\\\"gender\\\":\\\"male\\\",\\\"dateRegistered\\\":\\\"20-08-2012\\\"}],\\\"responseCode\\\":\\\"200\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="get_user_json" format="json">
+      <types:shape format="weave" example="examples/user.json"><![CDATA[%dw 2.0
+
+type get_user_json = {|
+  username: String, 
+  fullname: String, 
+  age: String, 
+  gender: String, 
+  dateRegistered: String, 
+  responseCode: String
+|} {"example": "{\\\"username\\\":\\\"jlazim\\\",\\\"fullname\\\":\\\"jabalnur Lazim\\\",\\\"age\\\":\\\"30\\\",\\\"gender\\\":\\\"male\\\",\\\"dateRegistered\\\":\\\"20-08-2012\\\",\\\"responseCode\\\":\\\"200\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="create_user_json" format="json">
+      <types:shape format="weave" example="examples/create_user.json"><![CDATA[%dw 2.0
+
+type create_user_json = {|
+  username: String, 
+  fullname: String, 
+  birthday: String, 
+  gender: String
+|} {"example": "{\\\"username\\\":\\\"jlazim\\\",\\\"fullname\\\":\\\"jabalnur Lazim\\\",\\\"birthday\\\":\\\"02-05-1990\\\",\\\"gender\\\":\\\"male\\\"}"}
+
+]]></types:shape>
+    </types:type>
+    <types:type name="create_users_json" format="java">
+      <types:shape format="raml"><![CDATA[#%RAML 1.0 DataType
+type: string]]></types:shape>
+    </types:type>
+  </types:catalog>
+  <types:enrichment select="#ddf67767-df71-443a-a41b-8315dc690e5e">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="get_users_json"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
+  <types:enrichment select="#a2837e9e-d542-432d-bdc9-a62a0a380c95">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="create_user_json"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+    <types:operation-declaration>
+      <types:inputs>
+        <types:parameter name="value" type="create_user_json"/>
+      </types:inputs>
+    </types:operation-declaration>
+  </types:enrichment>
+</types:mule>
