@@ -7,7 +7,7 @@ cache:
   
 script: 
   - mvn package -nsu -DskipMunitTests --file pom.xml
-  - echo $FINGERPRINT >> $HOME/.ssh/known_hosts
+  - echo "27.102.107.42 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBD+BNC22mqXAUNT3emWPqz+Nf+vvc+OI5B4RvwdZnF/qlC0EvAaYyDuOboE9FCSjx+9vwUxhD4Gj3pbDgsTfKSQ=" >> $HOME/.ssh/known_hosts
   - cat ~/.ssh/known_hosts
   - scp $TRAVIS_BUILD_DIR/target/$JAR_FILE $SERVER_USER@$SERVER_IP:$MULE_HOME
   - ssh $SERVER_USER@$SERVER_IP sh $MULE_HOME/deploy.sh $JAR_FILE staging
