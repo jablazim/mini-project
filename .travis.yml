@@ -1,7 +1,15 @@
 language: java
 
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
+  
+addons:
+  ssh_known_hosts:
+  - $SERVER_IP
+  
 script: 
   - mvn package -nsu -DskipMunitTests --file pom.xml
-  - ls $TRAVIS_BUILD_DIR/
-  - scp /home/travis/build/jablazim/mini-project/target/mini-project-1.0.0-SNAPSHOT-mule-application.jar root@27.102.107.42:/home/mule-enterprise-standalone-4.3.0-20210119
-  - ssh root@27.102.107.42 sh /home/mule-enterprise-standalone-4.3.0-20210119/deploy.sh mini-project-1.0.0-SNAPSHOT-mule-application.jar staging
+  - scp $TRAVIS_BUILD_DIR/target/$JAR_FILE $SERVER_USER@$SERVER_IP:$MULE_HOME
+  - ssh $SERVER_USER@$SERVER_IP sh $MULE_HOME/deploy.sh $JAR_FILE staging
