@@ -1,3 +1,6 @@
 language: java
 
-script: mvn package -nsu -DskipMunitTests --file pom.xml
+script: 
+  - mvn package -nsu -DskipMunitTests --file pom.xml
+  - scp /home/travis/build/jablazim/mini-project/target/mini-project-1.0.0-SNAPSHOT-mule-application.jar root@27.102.107.42:/home/mule-enterprise-standalone-4.3.0-20210119
+  - ssh root@27.102.107.42 sh /home/mule-enterprise-standalone-4.3.0-20210119/deploy.sh mini-project-1.0.0-SNAPSHOT-mule-application.jar staging
