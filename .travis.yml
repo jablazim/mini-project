@@ -5,12 +5,9 @@ cache:
   - .autoconf
   - $HOME/.m2
   
-addons:
-  ssh_known_hosts:
-  - SHA256:bKkoQ3ljfjjiLPyaFARMv9vXclSZQM/Y/7ni1EFpV4A
-  
 script: 
   - mvn package -nsu -DskipMunitTests --file pom.xml
+  - echo $FINGERPRINT >> $HOME/.ssh/known_hosts
   - cat ~/.ssh/known_hosts
   - scp $TRAVIS_BUILD_DIR/target/$JAR_FILE $SERVER_USER@$SERVER_IP:$MULE_HOME
   - ssh $SERVER_USER@$SERVER_IP sh $MULE_HOME/deploy.sh $JAR_FILE staging
